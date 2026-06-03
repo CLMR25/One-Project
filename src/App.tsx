@@ -221,6 +221,7 @@ export default function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSeeding, setIsSeeding] = useState(false);
 
   // Real-time Data States
   const [clients, setClients] = useState<CorporateClient[]>([]);
@@ -280,8 +281,11 @@ export default function App() {
   }, [appUser]);
 
   const seedDummyData = async () => {
-    console.log("Starting Enterprise Data Seeding...");
-    const MOCK_CLIENTS_DATA = [
+    if (isSeeding) return;
+    setIsSeeding(true);
+    try {
+      console.log("Starting Enterprise Data Seeding...");
+      const MOCK_CLIENTS_DATA = [
       { name: "PT. Astra International", email: "procurement@astra.co.id", phone: "+62 21 6522 555", industry: "Automotive", taxId: "01.234.567.8-091.000", address: "Jl. Gaya Motor No. 8, Jakarta", status: "Active" },
       { name: "PT. Telkom Indonesia", email: "b2b@telkom.co.id", phone: "+62 21 5215 111", industry: "Telecommunication", taxId: "02.345.678.9-092.000", address: "Gedung Telkom Landmark Tower, Jakarta", status: "Active" },
       { name: "Shopee Indonesia", email: "fleet@shopee.co.id", phone: "+62 21 8064 7100", industry: "E-commerce", address: "Pacific Century Place, SCBD", status: "Active" },
@@ -427,6 +431,12 @@ export default function App() {
     }
     
     alert("Enterprise Data Seeding completed. 25 Vehicles, 15 Drivers, and 30 orders have been generated.");
+    } catch (e: any) {
+      console.error(e);
+      alert("Error seeding data: " + e.message);
+    } finally {
+      setIsSeeding(false);
+    }
   };
 
   if (loading) return <div className="h-screen flex items-center justify-center font-bold text-primary animate-pulse">Initializing Hub...</div>;
@@ -549,9 +559,10 @@ export default function App() {
               size="sm" 
               className="w-full justify-start gap-2 h-9 text-[11px] font-bold border-dashed border-primary/30 text-primary hover:bg-primary/5"
               onClick={seedDummyData}
+              disabled={isSeeding}
             >
-              <Database size={14} />
-              Seed Blueprint Data
+              <Database size={14} className={isSeeding ? "animate-spin" : ""} />
+              {isSeeding ? "Seeding Data..." : "Seed Blueprint Data"}
             </Button>
           </div>
         </nav>
