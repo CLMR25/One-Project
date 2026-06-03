@@ -123,7 +123,7 @@ import {
   BusinessLine,
   Partner
 } from "./types";
-import { db, auth, signIn, handleFirestoreError, OperationType } from "./lib/firebase";
+import { db, handleFirestoreError, OperationType } from "./lib/firebase";
 import { 
   collection, 
   onSnapshot, 
@@ -136,7 +136,6 @@ import {
   serverTimestamp,
   setDoc
 } from "firebase/firestore";
-import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
@@ -151,13 +150,13 @@ const MOCK_CLIENTS: CorporateClient[] = [
 
 const MOCK_VEHICLES: Vehicle[] = [
   { id: "V-B1234AB", plateNumber: "B 1234 AB", model: "Toyota Camry", category: "Sedan", businessLine: "Bluebird", status: "Available", createdAt: new Date() },
-  { id: "V-B5678CD", plateNumber: "B 5678 CD", model: "Alphard", category: "SUV", businessLine: "Silverbird", status: "Busy", createdAt: new Date() },
+  { id: "V-B5678CD", plateNumber: "B 5678 CD", model: "Alphard", category: "SUV", businessLine: "Goldenbird", status: "Busy", createdAt: new Date() },
   { id: "V-B9012EF", plateNumber: "B 9012 EF", model: "Hino Bigbird", category: "Bus", businessLine: "Big Bird", status: "Maintenance", estimatedCompletionDate: "2026-05-10", createdAt: new Date() },
   { id: "V-B2345GH", plateNumber: "B 2345 GH", model: "Toyota Innova", category: "SUV", businessLine: "Goldenbird", status: "Available", createdAt: new Date() },
-  { id: "V-B6789IJ", plateNumber: "B 6789 IJ", model: "Mercedes Benz E-Class", category: "Sedan", businessLine: "Silverbird", status: "Available", createdAt: new Date() },
-  { id: "V-LOG-01", plateNumber: "B 4455 LOG", model: "Isuzu Giga", category: "Bus", businessLine: "Ironbird", status: "Available", createdAt: new Date() },
-  { id: "V-KIRIM-01", plateNumber: "B 1122 KRM", model: "Toyota Blind Van", category: "Van", businessLine: "Bluebird Kirim", status: "Busy", createdAt: new Date() },
-  { id: "V-MOBIL-01", plateNumber: "EX-DEMO-01", model: "Lexus RX", category: "SUV", businessLine: "BirdMobil", status: "Available", createdAt: new Date() },
+  { id: "V-B6789IJ", plateNumber: "B 6789 IJ", model: "Mercedes Benz E-Class", category: "Sedan", businessLine: "Goldenbird", status: "Available", createdAt: new Date() },
+  { id: "V-LOG-01", plateNumber: "B 4455 LOG", model: "Isuzu Giga", category: "Bus", businessLine: "Cititrans", status: "Available", createdAt: new Date() },
+  { id: "V-KIRIM-01", plateNumber: "B 1122 KRM", model: "Toyota Blind Van", category: "Van", businessLine: "Bluebird", status: "Busy", createdAt: new Date() },
+  { id: "V-MOBIL-01", plateNumber: "EX-DEMO-01", model: "Lexus RX", category: "SUV", businessLine: "Goldenbird", status: "Available", createdAt: new Date() },
 ];
 
 const MOCK_DRIVERS: Driver[] = [
@@ -167,9 +166,9 @@ const MOCK_DRIVERS: Driver[] = [
 ];
 
 const MOCK_ORDERS: Order[] = [
-  { id: "ORD-1001", clientId: "CL-001", vehicleId: "V-B5678CD", driverId: "D-002", businessLine: "Silverbird", status: "Active", pickupDate: "2026-05-01", returnDate: "2026-05-05", price: 2500000, paymentStatus: "Outstanding", createdAt: new Date() },
+  { id: "ORD-1001", clientId: "CL-001", vehicleId: "V-B5678CD", driverId: "D-002", businessLine: "Goldenbird", status: "Active", pickupDate: "2026-05-01", returnDate: "2026-05-05", price: 2500000, paymentStatus: "Outstanding", createdAt: new Date() },
   { id: "ORD-1002", clientId: "CL-002", vehicleId: "V-B1234AB", driverId: "D-001", businessLine: "Bluebird", status: "Completed", pickupDate: "2026-04-20", returnDate: "2026-04-22", price: 1500000, paymentStatus: "Paid", createdAt: new Date() },
-  { id: "ORD-1003", clientId: "CL-001", vehicleId: "V-LOG-01", driverId: "D-001", businessLine: "Ironbird", status: "Active", pickupDate: "2026-05-01", returnDate: "2026-05-15", price: 45000000, paymentStatus: "Outstanding", createdAt: new Date() },
+  { id: "ORD-1003", clientId: "CL-001", vehicleId: "V-LOG-01", driverId: "D-001", businessLine: "Cititrans", status: "Active", pickupDate: "2026-05-01", returnDate: "2026-05-15", price: 45000000, paymentStatus: "Outstanding", createdAt: new Date() },
 ];
 
 type View = "Dashboard" | "Clients" | "Fleet" | "Drivers" | "Sales" | "Finance" | "Logs" | "Partners" | "Users";
@@ -213,11 +212,11 @@ interface AppUser {
 }
 
 export default function App() {
-  const [firebaseUser, setFirebaseUser] = useState<User | null>(null);
+  // No longer using firebaseUser
   const [appUser, setAppUser] = useState<AppUser | null>(null);
   const [role, setRole] = useState<UserRole>("GM");
   const [selectedSalesId, setSelectedSalesId] = useState<string>("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [currentView, setCurrentView] = useState<View>("Dashboard");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -230,14 +229,6 @@ export default function App() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [partners, setPartners] = useState<Partner[]>([]);
-
-  useEffect(() => {
-    const unsubscribeAuth = onAuthStateChanged(auth, (u) => {
-      setFirebaseUser(u);
-      setLoading(false);
-    });
-    return () => unsubscribeAuth();
-  }, []);
 
   useEffect(() => {
     if (!appUser) return;
@@ -324,7 +315,7 @@ export default function App() {
       "Honda": ["Accord", "CR-V", "Civic"]
     };
     const categories: Vehicle["category"][] = ["Sedan", "SUV", "Bus", "Luxury Sedan", "Van"];
-    const lobs: BusinessLine[] = ["Bluebird", "Silverbird", "Goldenbird", "Big Bird", "BirdMobil", "Ironbird", "Bluebird Kirim", "Cititrans"];
+    const lobs: BusinessLine[] = ["Bluebird", "Goldenbird", "Big Bird", "Cititrans"];
     const statuses: Vehicle["status"][] = ["Available", "Busy", "Maintenance"];
 
     // Generate 25 vehicles
@@ -440,34 +431,16 @@ export default function App() {
 
   if (loading) return <div className="h-screen flex items-center justify-center font-bold text-primary animate-pulse">Initializing Hub...</div>;
 
-  if (!firebaseUser) {
-    return (
-      <div className="h-screen flex flex-col items-center justify-center bg-accent/10 p-6">
-        <div className="max-w-md w-full bg-card p-8 rounded-2xl shadow-xl border text-center space-y-6">
-          <div className="w-16 h-16 bg-primary rounded-2xl mx-auto flex items-center justify-center text-white">
-            <Car size={32} />
-          </div>
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight">Bluebird B2B Enterprise</h1>
-            <p className="text-muted-foreground mt-2">Manage your corporate fleet operations securely.</p>
-          </div>
-          <Button className="w-full gap-2 h-12" onClick={signIn}>
-            <LogIn size={20} />
-            Sign in with Google
-          </Button>
-          <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Authorized Personnel Only</p>
-        </div>
-      </div>
-    );
-  }
-
   if (!appUser) {
     return (
       <div className="h-screen flex flex-col items-center justify-center bg-accent/10 p-6">
         <div className="max-w-md w-full bg-card p-8 rounded-2xl shadow-xl border space-y-6">
+          <div className="w-16 h-16 bg-primary rounded-2xl mx-auto flex items-center justify-center text-white">
+            <Car size={32} />
+          </div>
           <div className="text-center">
-            <h2 className="text-xl font-bold">Complete Your Profile</h2>
-            <p className="text-sm text-muted-foreground">Select your role and account to continue.</p>
+            <h1 className="text-2xl font-bold tracking-tight">Bluebird B2B Enterprise</h1>
+            <p className="text-sm text-muted-foreground mt-2">Select your access role to continue.</p>
           </div>
           
           <div className="space-y-4">
@@ -503,25 +476,22 @@ export default function App() {
             )}
 
             <Button 
-              className="w-full" 
+              className="w-full gap-2 h-12" 
               disabled={role === "Sales" && !selectedSalesId}
               onClick={() => {
                 const salesPerson = MOCK_SALES_PEOPLE.find(s => s.id === selectedSalesId);
                 setAppUser({
-                  uid: firebaseUser.uid,
-                  email: firebaseUser.email,
-                  displayName: firebaseUser.displayName,
+                  uid: `local-${role.toLowerCase()}`,
+                  email: `${role.toLowerCase()}@bluebirdsystem.local`,
+                  displayName: role === "Sales" ? salesPerson?.name || "Sales" : role,
                   role: role,
                   salesId: role === "Sales" ? selectedSalesId : undefined,
                   salesName: role === "Sales" ? salesPerson?.name : undefined
                 });
               }}
             >
+              <LogIn size={20} />
               Enter Hub
-            </Button>
-            
-            <Button variant="ghost" className="w-full text-xs" onClick={() => signOut(auth)}>
-              Sign Out
             </Button>
           </div>
         </div>
@@ -668,7 +638,7 @@ export default function App() {
               <Bell size={20} />
               <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-card" />
             </Button>
-            <Button variant="ghost" size="icon" onClick={() => { signOut(auth); setAppUser(null); }}>
+            <Button variant="ghost" size="icon" onClick={() => { setAppUser(null); }}>
               <LogOut size={20} className="text-muted-foreground" />
             </Button>
             <div className="w-8 h-8 rounded-full bg-accent border flex items-center justify-center font-bold text-xs">
@@ -896,7 +866,7 @@ function ClientDetail({ clientId, clients, orders, navigateTo }: { clientId: str
                       </DialogDescription>
                    </DialogHeader>
                    <div className="py-4 space-y-4">
-                      {["Bluebird", "Silverbird", "Goldenbird", "Big Bird", "Ironbird", "Cititrans", "Bluebird Kirim", "BirdMobil"].map(lob => {
+                      {["Bluebird", "Goldenbird", "Big Bird", "Cititrans"].map(lob => {
                          const lobOrders = clientOrders.filter(o => o.businessLine === lob);
                          if (lobOrders.length === 0) return null;
                          return (
@@ -1465,13 +1435,9 @@ function CreateOrderDialog({ vehicles, clients, drivers, onCreate, appUser }: {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="Bluebird">Bluebird (Taxi)</SelectItem>
-                  <SelectItem value="Silverbird">Silverbird (Premium)</SelectItem>
                   <SelectItem value="Goldenbird">Goldenbird (Car Rental)</SelectItem>
                   <SelectItem value="Big Bird">Big Bird (Bus)</SelectItem>
-                  <SelectItem value="Ironbird">Ironbird (Logistics & Cargo)</SelectItem>
                   <SelectItem value="Cititrans">Cititrans (Executive Shuttle)</SelectItem>
-                  <SelectItem value="Bluebird Kirim">Bluebird Kirim (Delivery)</SelectItem>
-                  <SelectItem value="BirdMobil">BirdMobil (Mobility Ecosystem)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -1942,10 +1908,10 @@ function GMDashboard({ navigateTo, vehicles, orders, role }: {
          </CardHeader>
          <CardContent className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { title: "BirdMobil", desc: "Layanan mobil terpercaya: beli, perawatan, jual, dan inspeksi – secara transparan & digital." },
-              { title: "Ironbird", desc: "Layanan logistik dan pengiriman kargo skala besar untuk kebutuhan operasional enterprise." },
-              { title: "Bluebird Kirim", desc: "Logistik dalam kota dengan tarif transparan dan sistem pelacakan real-time presisi." },
-              { title: "Cititrans", desc: "Executive inter-city shuttle. Armada premium dengan kenyamanan maksimal & jadwal fleksibel." }
+              { title: "Bluebird", desc: "Layanan taksi andal untuk mobilitas individu maupun solusi korporasi." },
+              { title: "Goldenbird", desc: "Rental mobil premium harian maupun jangka panjang dengan armada mewah." },
+              { title: "Big Bird", desc: "Sewa bus premium pariwisata hingga layanan antar jemput karyawan." },
+              { title: "Cititrans", desc: "Executive shuttle antar-kota premium dengan kenyamanan maksimal dan jadwal terjadwal." }
             ].map((scope, idx) => (
               <div key={idx} className="space-y-2 group">
                  <h4 className="text-xs font-black text-primary uppercase tracking-tighter border-b border-primary/10 pb-1 w-fit group-hover:border-primary transition-colors">{scope.title}</h4>
@@ -2161,7 +2127,7 @@ function AddVehicleDialog() {
                   <SelectValue placeholder="Select LOB" />
                 </SelectTrigger>
                 <SelectContent>
-                  {["Bluebird", "Silverbird", "Goldenbird", "Big Bird", "Ironbird", "Cititrans", "Bluebird Kirim", "BirdMobil"].map(lob => (
+                  {["Bluebird", "Goldenbird", "Big Bird", "Cititrans"].map(lob => (
                     <SelectItem key={lob} value={lob}>{lob}</SelectItem>
                   ))}
                 </SelectContent>
@@ -2346,7 +2312,7 @@ function ClientsList({ clients, navigateTo }: { clients: CorporateClient[], navi
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest min-w-[70px]">Business Line:</span>
             <div className="flex gap-1 overflow-x-auto pb-1 scrollbar-hide">
-              {["All", "Bluebird", "Silverbird", "Goldenbird", "Big Bird", "Ironbird", "Cititrans", "Bluebird Kirim", "BirdMobil"].map((l) => (
+              {["All", "Bluebird", "Goldenbird", "Big Bird", "Cititrans"].map((l) => (
                 <Button 
                   key={l}
                   variant={lobFilter === l ? "default" : "outline"} 

@@ -1,6 +1,6 @@
 export type EntityStatus = "Active" | "Inactive" | "Maintenance" | "Draft" | "Completed" | "Outstanding" | "Paid" | "Busy" | "Available";
 
-export type BusinessLine = "Bluebird" | "Silverbird" | "Goldenbird" | "Big Bird" | "BirdMobil" | "Ironbird" | "Bluebird Kirim" | "Cititrans";
+export type BusinessLine = "Bluebird" | "Goldenbird" | "Big Bird" | "Cititrans";
 
 export interface CorporateClient {
   id: string;
