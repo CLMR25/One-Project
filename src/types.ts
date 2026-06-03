@@ -1,6 +1,6 @@
 export type EntityStatus = "Active" | "Inactive" | "Maintenance" | "Draft" | "Completed" | "Outstanding" | "Paid" | "Busy" | "Available";
 
-export type BusinessLine = "Bluebird" | "Goldenbird" | "Big Bird" | "Cititrans";
+export type BusinessLine = "E-Voucher" | "Goldenbird" | "Big Bird" | "Cititrans";
 
 export interface CorporateClient {
   id: string;
@@ -20,7 +20,7 @@ export interface Vehicle {
   stnkNumber?: string;
   taxExpiryDate?: string;
   model: string;
-  category: "Sedan" | "SUV" | "Bus" | "Luxury Sedan" | "Van";
+  category: "MPV" | "MPV Large" | "MPV Premium" | "e-Goldenbird" | "Charter Bus Alpha" | "Charter Bus Bravo" | "Charter Bus Charlie" | "Regular Shuttle" | "Executive Shuttle" | "Jabodetabek Airport Connexion (JAC)" | "Busline";
   businessLine: BusinessLine;
   status: "Available" | "Maintenance" | "Busy";
   estimatedCompletionDate?: string;
@@ -43,8 +43,8 @@ export interface Driver {
 export interface Order {
   id: string;
   clientId: string;
-  vehicleId: string;
-  driverId: string;
+  vehicleId?: string;
+  driverId?: string;
   businessLine: BusinessLine;
   status: "Draft" | "Active" | "Completed";
   pickupDate: string;

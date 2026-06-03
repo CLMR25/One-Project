@@ -149,26 +149,44 @@ const MOCK_CLIENTS: CorporateClient[] = [
 ];
 
 const MOCK_VEHICLES: Vehicle[] = [
-  { id: "V-B1234AB", plateNumber: "B 1234 AB", model: "Toyota Camry", category: "Sedan", businessLine: "Bluebird", status: "Available", createdAt: new Date() },
-  { id: "V-B5678CD", plateNumber: "B 5678 CD", model: "Alphard", category: "SUV", businessLine: "Goldenbird", status: "Busy", createdAt: new Date() },
-  { id: "V-B9012EF", plateNumber: "B 9012 EF", model: "Hino Bigbird", category: "Bus", businessLine: "Big Bird", status: "Maintenance", estimatedCompletionDate: "2026-05-10", createdAt: new Date() },
-  { id: "V-B2345GH", plateNumber: "B 2345 GH", model: "Toyota Innova", category: "SUV", businessLine: "Goldenbird", status: "Available", createdAt: new Date() },
-  { id: "V-B6789IJ", plateNumber: "B 6789 IJ", model: "Mercedes Benz E-Class", category: "Sedan", businessLine: "Goldenbird", status: "Available", createdAt: new Date() },
-  { id: "V-LOG-01", plateNumber: "B 4455 LOG", model: "Isuzu Giga", category: "Bus", businessLine: "Cititrans", status: "Available", createdAt: new Date() },
-  { id: "V-KIRIM-01", plateNumber: "B 1122 KRM", model: "Toyota Blind Van", category: "Van", businessLine: "Bluebird", status: "Busy", createdAt: new Date() },
-  { id: "V-MOBIL-01", plateNumber: "EX-DEMO-01", model: "Lexus RX", category: "SUV", businessLine: "Goldenbird", status: "Available", createdAt: new Date() },
+  // Goldenbird
+  { id: "V-B1001AB", plateNumber: "B 1001 AB", model: "Toyota Avanza", category: "MPV", businessLine: "Goldenbird", status: "Available", createdAt: new Date() },
+  { id: "V-B1002AB", plateNumber: "B 1002 AB", model: "Toyota Innova Zenix", category: "MPV Large", businessLine: "Goldenbird", status: "Available", createdAt: new Date() },
+  { id: "V-B1003AB", plateNumber: "B 1003 AB", model: "Toyota Innova Reborn", category: "MPV Large", businessLine: "Goldenbird", status: "Busy", createdAt: new Date() },
+  { id: "V-B1004AB", plateNumber: "B 1004 AB", model: "Toyota New Alphard", category: "MPV Premium", businessLine: "Goldenbird", status: "Available", createdAt: new Date() },
+  { id: "V-B1005AB", plateNumber: "B 1005 AB", model: "Toyota Alphard", category: "MPV Premium", businessLine: "Goldenbird", status: "Maintenance", estimatedCompletionDate: "2026-05-10", createdAt: new Date() },
+  { id: "V-B1006AB", plateNumber: "B 1006 AB", model: "BMW i7", category: "e-Goldenbird", businessLine: "Goldenbird", status: "Available", createdAt: new Date() },
+  { id: "V-B1007AB", plateNumber: "B 1007 AB", model: "Genesis G80", category: "e-Goldenbird", businessLine: "Goldenbird", status: "Busy", createdAt: new Date() },
+  { id: "V-B1008AB", plateNumber: "B 1008 AB", model: "Denza D9", category: "e-Goldenbird", businessLine: "Goldenbird", status: "Available", createdAt: new Date() },
+  { id: "V-B1009AB", plateNumber: "B 1009 AB", model: "BMW IX", category: "e-Goldenbird", businessLine: "Goldenbird", status: "Available", createdAt: new Date() },
+  { id: "V-B1010AB", plateNumber: "B 1010 AB", model: "BYD M6", category: "e-Goldenbird", businessLine: "Goldenbird", status: "Busy", createdAt: new Date() },
+  // Bigbird
+  { id: "V-B2001BB", plateNumber: "B 2001 BB", model: "Alpha Regular", category: "Charter Bus Alpha", businessLine: "Big Bird", status: "Available", createdAt: new Date() },
+  { id: "V-B2002BB", plateNumber: "B 2002 BB", model: "Alpha Premium", category: "Charter Bus Alpha", businessLine: "Big Bird", status: "Available", createdAt: new Date() },
+  { id: "V-B2003BB", plateNumber: "B 2003 BB", model: "Bravo Regular", category: "Charter Bus Bravo", businessLine: "Big Bird", status: "Busy", createdAt: new Date() },
+  { id: "V-B2004BB", plateNumber: "B 2004 BB", model: "Bravo Premium", category: "Charter Bus Bravo", businessLine: "Big Bird", status: "Available", createdAt: new Date() },
+  { id: "V-B2005BB", plateNumber: "B 2005 BB", model: "Charlie Regular", category: "Charter Bus Charlie", businessLine: "Big Bird", status: "Available", createdAt: new Date() },
+  { id: "V-B2006BB", plateNumber: "B 2006 BB", model: "Charlie Premium", category: "Charter Bus Charlie", businessLine: "Big Bird", status: "Maintenance", estimatedCompletionDate: "2026-06-15", createdAt: new Date() },
+  // Cititrans
+  { id: "V-B3001CC", plateNumber: "B 3001 CC", model: "Hiace Commuter 8 Seats", category: "Regular Shuttle", businessLine: "Cititrans", status: "Available", createdAt: new Date() },
+  { id: "V-B3002CC", plateNumber: "B 3002 CC", model: "Hiace Commuter 8 Seats", category: "Executive Shuttle", businessLine: "Cititrans", status: "Busy", createdAt: new Date() },
+  { id: "V-B3003CC", plateNumber: "B 3003 CC", model: "Hiace Premio", category: "Executive Shuttle", businessLine: "Cititrans", status: "Available", createdAt: new Date() },
+  { id: "V-B3004CC", plateNumber: "B 3004 CC", model: "Bravo Bus 21 Seats", category: "Jabodetabek Airport Connexion (JAC)", businessLine: "Cititrans", status: "Available", createdAt: new Date() },
+  { id: "V-B3005CC", plateNumber: "B 3005 CC", model: "Hiace Commuter", category: "Jabodetabek Airport Connexion (JAC)", businessLine: "Cititrans", status: "Available", createdAt: new Date() },
+  { id: "V-B3006CC", plateNumber: "B 3006 CC", model: "Suite Bus", category: "Busline", businessLine: "Cititrans", status: "Busy", createdAt: new Date() },
+  { id: "V-B3007CC", plateNumber: "B 3007 CC", model: "Super Executive Bus", category: "Busline", businessLine: "Cititrans", status: "Available", createdAt: new Date() }
 ];
 
 const MOCK_DRIVERS: Driver[] = [
   { id: "D-001", name: "Budi Santoso", phone: "08123456789", status: "Available", createdAt: new Date() },
-  { id: "D-002", name: "Slamet Rahardjo", phone: "08123456780", status: "Busy", assignedVehicleId: "V-B5678CD", createdAt: new Date() },
+  { id: "D-002", name: "Slamet Rahardjo", phone: "08123456780", status: "Busy", assignedVehicleId: "V-B1003AB", createdAt: new Date() },
   { id: "D-003", name: "Andi Wijaya", phone: "08123456781", status: "Off", createdAt: new Date() },
 ];
 
 const MOCK_ORDERS: Order[] = [
-  { id: "ORD-1001", clientId: "CL-001", vehicleId: "V-B5678CD", driverId: "D-002", businessLine: "Goldenbird", status: "Active", pickupDate: "2026-05-01", returnDate: "2026-05-05", price: 2500000, paymentStatus: "Outstanding", createdAt: new Date() },
-  { id: "ORD-1002", clientId: "CL-002", vehicleId: "V-B1234AB", driverId: "D-001", businessLine: "Bluebird", status: "Completed", pickupDate: "2026-04-20", returnDate: "2026-04-22", price: 1500000, paymentStatus: "Paid", createdAt: new Date() },
-  { id: "ORD-1003", clientId: "CL-001", vehicleId: "V-LOG-01", driverId: "D-001", businessLine: "Cititrans", status: "Active", pickupDate: "2026-05-01", returnDate: "2026-05-15", price: 45000000, paymentStatus: "Outstanding", createdAt: new Date() },
+  { id: "ORD-1001", clientId: "CL-001", vehicleId: "V-B1003AB", driverId: "D-002", businessLine: "Goldenbird", status: "Active", pickupDate: "2026-05-01", returnDate: "2026-05-05", price: 2500000, paymentStatus: "Outstanding", createdAt: new Date() },
+  { id: "ORD-1002", clientId: "CL-002", businessLine: "E-Voucher", status: "Completed", pickupDate: "2026-04-20", returnDate: "2026-04-22", price: 1500000, paymentStatus: "Paid", createdAt: new Date() },
+  { id: "ORD-1003", clientId: "CL-001", vehicleId: "V-B3006CC", driverId: "D-001", businessLine: "Cititrans", status: "Active", pickupDate: "2026-05-01", returnDate: "2026-05-15", price: 45000000, paymentStatus: "Outstanding", createdAt: new Date() },
 ];
 
 type View = "Dashboard" | "Clients" | "Fleet" | "Drivers" | "Sales" | "Finance" | "Logs" | "Partners" | "Users";
@@ -305,29 +323,43 @@ export default function App() {
       }).catch(e => handleFirestoreError(e, OperationType.WRITE, `clients/${id}`));
     }
     
-    const brands = ["Toyota", "Mercedes-Benz", "BMW", "Lexus", "Tesla", "Hino", "Scania", "Isuzu", "Hyundai", "Honda"];
-    const models: Record<string, string[]> = {
-      "Toyota": ["Alphard", "Camry", "Innova Zenix", "Voxy", "Corolla Cross", "Blind Van"],
-      "Mercedes-Benz": ["E 200", "S-Class", "Sprinter", "G-Class"],
-      "BMW": ["X5", "5 Series", "7 Series"],
-      "Lexus": ["RX", "LM 350", "ES"],
-      "Tesla": ["Model 3", "Model Y", "Model X"],
-      "Hino": ["Bigbird Bus", "Ranger Logistics", "Dutro"],
-      "Scania": ["Intercity Bus", "Cargo Truck"],
-      "Isuzu": ["Giga", "Elf", "Traga"],
-      "Hyundai": ["Ioniq 5", "Staria", "Palisade"],
-      "Honda": ["Accord", "CR-V", "Civic"]
-    };
-    const categories: Vehicle["category"][] = ["Sedan", "SUV", "Bus", "Luxury Sedan", "Van"];
-    const lobs: BusinessLine[] = ["Bluebird", "Goldenbird", "Big Bird", "Cititrans"];
     const statuses: Vehicle["status"][] = ["Available", "Busy", "Maintenance"];
 
-    // Generate 25 vehicles
-    for (let i = 0; i < 25; i++) {
-      const brand = brands[Math.floor(Math.random() * brands.length)];
-      const model = models[brand][Math.floor(Math.random() * models[brand].length)];
-      const category = categories[Math.floor(Math.random() * categories.length)];
-      const businessLine = lobs[Math.floor(Math.random() * lobs.length)];
+    const vehiclePool = [
+      // Goldenbird
+      { businessLine: "Goldenbird", category: "MPV", model: "Toyota Avanza" },
+      { businessLine: "Goldenbird", category: "MPV Large", model: "Toyota Innova Zenix" },
+      { businessLine: "Goldenbird", category: "MPV Large", model: "Toyota Innova Reborn" },
+      { businessLine: "Goldenbird", category: "MPV Premium", model: "Toyota New Alphard" },
+      { businessLine: "Goldenbird", category: "MPV Premium", model: "Toyota Alphard" },
+      { businessLine: "Goldenbird", category: "e-Goldenbird", model: "BMW i7" },
+      { businessLine: "Goldenbird", category: "e-Goldenbird", model: "Genesis G80" },
+      { businessLine: "Goldenbird", category: "e-Goldenbird", model: "Denza D9" },
+      { businessLine: "Goldenbird", category: "e-Goldenbird", model: "BMW IX" },
+      { businessLine: "Goldenbird", category: "e-Goldenbird", model: "BYD M6" },
+      // Bigbird
+      { businessLine: "Big Bird", category: "Charter Bus Alpha", model: "Alpha Regular" },
+      { businessLine: "Big Bird", category: "Charter Bus Alpha", model: "Alpha Premium" },
+      { businessLine: "Big Bird", category: "Charter Bus Bravo", model: "Bravo Regular" },
+      { businessLine: "Big Bird", category: "Charter Bus Bravo", model: "Bravo Premium" },
+      { businessLine: "Big Bird", category: "Charter Bus Charlie", model: "Charlie Regular" },
+      { businessLine: "Big Bird", category: "Charter Bus Charlie", model: "Charlie Premium" },
+      // Cititrans
+      { businessLine: "Cititrans", category: "Regular Shuttle", model: "Hiace Commuter 8 Seats" },
+      { businessLine: "Cititrans", category: "Executive Shuttle", model: "Hiace Commuter 8 Seats" },
+      { businessLine: "Cititrans", category: "Executive Shuttle", model: "Hiace Premio" },
+      { businessLine: "Cititrans", category: "Jabodetabek Airport Connexion (JAC)", model: "Bravo Bus 21 Seats" },
+      { businessLine: "Cititrans", category: "Jabodetabek Airport Connexion (JAC)", model: "Hiace Commuter" },
+      { businessLine: "Cititrans", category: "Busline", model: "Suite Bus" },
+      { businessLine: "Cititrans", category: "Busline", model: "Super Executive Bus" }
+    ];
+
+    // Generate 35 vehicles (expanded to cover more types)
+    for (let i = 0; i < 35; i++) {
+      const template = vehiclePool[Math.floor(Math.random() * vehiclePool.length)];
+      const category = template.category as Vehicle["category"];
+      const businessLine = template.businessLine as BusinessLine;
+      const model = template.model;
       const status = statuses[Math.floor(Math.random() * statuses.length)];
       
       const p2 = Math.floor(1000 + Math.random() * 9000);
@@ -340,7 +372,7 @@ export default function App() {
         plateNumber: plate,
         stnkNumber: `STNK-${Math.floor(100000 + Math.random() * 900000)}`,
         taxExpiryDate: `2027-0${Math.floor(Math.random() * 9) + 1}-0${Math.floor(Math.random() * 9) + 1}`,
-        model: `${brand} ${model}`,
+        model: model,
         category,
         businessLine,
         status,
@@ -389,10 +421,9 @@ export default function App() {
 
       const salesPerson = MOCK_SALES_PEOPLE[Math.floor(Math.random() * MOCK_SALES_PEOPLE.length)];
 
-      await setDoc(doc(db, "orders", orderId), {
+      const isEVoucher = businessLine === "E-Voucher";
+      const orderData: any = {
         clientId,
-        vehicleId: `V-B${Math.floor(1000 + Math.random() * 9000)}XX`, 
-        driverId: `D-DRV-${100 + Math.floor(Math.random() * 15)}`,
         businessLine,
         status: statusOptions[Math.floor(Math.random() * statusOptions.length)],
         pickupDate: pickupDate.toISOString().split("T")[0],
@@ -402,7 +433,14 @@ export default function App() {
         salesId: salesPerson.id,
         salesName: salesPerson.name,
         createdAt: serverTimestamp()
-      }).catch(e => handleFirestoreError(e, OperationType.CREATE, `orders/${orderId}`));
+      };
+      
+      if (!isEVoucher) {
+        orderData.vehicleId = `V-B${Math.floor(1000 + Math.random() * 9000)}XX`;
+        orderData.driverId = `D-DRV-${100 + Math.floor(Math.random() * 15)}`;
+      }
+
+      await setDoc(doc(db, "orders", orderId), orderData).catch(e => handleFirestoreError(e, OperationType.CREATE, `orders/${orderId}`));
     }
     
     const MOCK_PARTNERS_EXTRA = [
@@ -877,7 +915,7 @@ function ClientDetail({ clientId, clients, orders, navigateTo }: { clientId: str
                       </DialogDescription>
                    </DialogHeader>
                    <div className="py-4 space-y-4">
-                      {["Bluebird", "Goldenbird", "Big Bird", "Cititrans"].map(lob => {
+                      {["E-Voucher", "Goldenbird", "Big Bird", "Cititrans"].map(lob => {
                          const lobOrders = clientOrders.filter(o => o.businessLine === lob);
                          if (lobOrders.length === 0) return null;
                          return (
@@ -1368,7 +1406,7 @@ function CreateOrderDialog({ vehicles, clients, drivers, onCreate, appUser }: {
   const [selectedClient, setSelectedClient] = useState("");
   const [selectedDriver, setSelectedDriver] = useState("");
   const [selectedSales, setSelectedSales] = useState(appUser.role === "Sales" ? appUser.salesId || "" : "");
-  const [businessLine, setBusinessLine] = useState<BusinessLine>("Bluebird");
+  const [businessLine, setBusinessLine] = useState<BusinessLine>("E-Voucher");
   const [price, setPrice] = useState("");
 
   const formatIDR = (val: string) => {
@@ -1392,10 +1430,11 @@ function CreateOrderDialog({ vehicles, clients, drivers, onCreate, appUser }: {
       const orderId = `ORD-${Math.floor(Math.random() * 9000) + 1000}`;
       const salesId = appUser.role === "Sales" ? appUser.salesId : selectedSales;
       const salesPerson = MOCK_SALES_PEOPLE.find(s => s.id === salesId);
-      await setDoc(doc(db, "orders", orderId), {
+      const isEVoucher = businessLine === "E-Voucher";
+
+      const orderData: any = {
         clientId: selectedClient,
-        vehicleId: selectedVehicle,
-        driverId: selectedDriver,
+        businessLine: businessLine,
         salesId: salesId,
         salesName: salesPerson?.name || "Unassigned",
         status: "Draft",
@@ -1404,9 +1443,19 @@ function CreateOrderDialog({ vehicles, clients, drivers, onCreate, appUser }: {
         price: Number(price),
         paymentStatus: "Outstanding",
         createdAt: serverTimestamp()
-      });
+      };
+
+      if (!isEVoucher) {
+        orderData.vehicleId = selectedVehicle;
+        orderData.driverId = selectedDriver;
+      }
+
+      await setDoc(doc(db, "orders", orderId), orderData);
+      
       // Update vehicle status too
-      await updateDoc(doc(db, "vehicles", selectedVehicle), { status: "Busy" });
+      if (!isEVoucher && selectedVehicle) {
+        await updateDoc(doc(db, "vehicles", selectedVehicle), { status: "Busy" });
+      }
       setOpen(false); // Close dialog on success
       // Reset form
       setPrice(""); setSelectedVehicle(""); setSelectedClient(""); setSelectedDriver("");
@@ -1445,7 +1494,7 @@ function CreateOrderDialog({ vehicles, clients, drivers, onCreate, appUser }: {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Bluebird">Bluebird (Taxi)</SelectItem>
+                  <SelectItem value="E-Voucher">E-Voucher</SelectItem>
                   <SelectItem value="Goldenbird">Goldenbird (Car Rental)</SelectItem>
                   <SelectItem value="Big Bird">Big Bird (Bus)</SelectItem>
                   <SelectItem value="Cititrans">Cititrans (Executive Shuttle)</SelectItem>
@@ -1463,34 +1512,36 @@ function CreateOrderDialog({ vehicles, clients, drivers, onCreate, appUser }: {
               <Input type="date" className="h-9" value={returnDate} onChange={e => setReturnDate(e.target.value)} />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="grid gap-1.5">
-              <Label className="text-[10px] font-bold uppercase text-slate-400">Available Asset</Label>
-              <Select onValueChange={setSelectedVehicle}>
-                <SelectTrigger className="h-9">
-                  <SelectValue placeholder="Unit" />
-                </SelectTrigger>
-                <SelectContent>
-                  {availableVehicles.map(v => (
-                    <SelectItem key={v.id} value={v.id}>{v.model} ({v.plateNumber})</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+          {businessLine !== "E-Voucher" && (
+            <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-1.5">
+                <Label className="text-[10px] font-bold uppercase text-slate-400">Available Asset</Label>
+                <Select onValueChange={setSelectedVehicle}>
+                  <SelectTrigger className="h-9">
+                    <SelectValue placeholder="Unit" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {availableVehicles.map(v => (
+                      <SelectItem key={v.id} value={v.id}>{v.model} ({v.plateNumber})</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid gap-1.5">
+                <Label className="text-[10px] font-bold uppercase text-slate-400">Dedicated Staff</Label>
+                <Select onValueChange={setSelectedDriver}>
+                  <SelectTrigger className="h-9">
+                    <SelectValue placeholder="Staff" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {drivers.filter(d => d.status === 'Available').map(d => (
+                      <SelectItem key={d.id} value={d.id}>{d.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-            <div className="grid gap-1.5">
-              <Label className="text-[10px] font-bold uppercase text-slate-400">Dedicated Staff</Label>
-              <Select onValueChange={setSelectedDriver}>
-                <SelectTrigger className="h-9">
-                  <SelectValue placeholder="Staff" />
-                </SelectTrigger>
-                <SelectContent>
-                  {drivers.filter(d => d.status === 'Available').map(d => (
-                    <SelectItem key={d.id} value={d.id}>{d.name}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
+          )}
           {appUser.role !== "Sales" && (
             <div className="grid gap-1.5">
               <Label className="text-[10px] font-bold uppercase text-slate-400">Sales Executive</Label>
@@ -2074,8 +2125,8 @@ function AddVehicleDialog() {
   const [open, setOpen] = useState(false);
   const [plate, setPlate] = useState("");
   const [model, setModel] = useState("");
-  const [category, setCategory] = useState<"Sedan" | "SUV" | "Bus" | "Luxury Sedan" | "Van">("Sedan");
-  const [businessLine, setBusinessLine] = useState<BusinessLine>("Bluebird");
+  const [category, setCategory] = useState<string>("MPV");
+  const [businessLine, setBusinessLine] = useState<BusinessLine>("E-Voucher");
 
   const handleCreate = async () => {
     try {
@@ -2123,11 +2174,17 @@ function AddVehicleDialog() {
                   <SelectValue placeholder="Select Class" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Sedan">Sedan</SelectItem>
-                  <SelectItem value="Luxury Sedan">Luxury Sedan</SelectItem>
-                  <SelectItem value="SUV">SUV</SelectItem>
-                  <SelectItem value="Van">Van</SelectItem>
-                  <SelectItem value="Bus">Bus</SelectItem>
+                  <SelectItem value="MPV">Goldenbird: MPV</SelectItem>
+                  <SelectItem value="MPV Large">Goldenbird: MPV Large</SelectItem>
+                  <SelectItem value="MPV Premium">Goldenbird: MPV Premium</SelectItem>
+                  <SelectItem value="e-Goldenbird">Goldenbird: e-Goldenbird</SelectItem>
+                  <SelectItem value="Charter Bus Alpha">Bigbird: Charter Bus Alpha</SelectItem>
+                  <SelectItem value="Charter Bus Bravo">Bigbird: Charter Bus Bravo</SelectItem>
+                  <SelectItem value="Charter Bus Charlie">Bigbird: Charter Bus Charlie</SelectItem>
+                  <SelectItem value="Regular Shuttle">Cititrans: Regular Shuttle</SelectItem>
+                  <SelectItem value="Executive Shuttle">Cititrans: Executive Shuttle</SelectItem>
+                  <SelectItem value="Jabodetabek Airport Connexion (JAC)">Cititrans: JAC</SelectItem>
+                  <SelectItem value="Busline">Cititrans: Busline</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -2138,7 +2195,7 @@ function AddVehicleDialog() {
                   <SelectValue placeholder="Select LOB" />
                 </SelectTrigger>
                 <SelectContent>
-                  {["Bluebird", "Goldenbird", "Big Bird", "Cititrans"].map(lob => (
+                  {["E-Voucher", "Goldenbird", "Big Bird", "Cititrans"].map(lob => (
                     <SelectItem key={lob} value={lob}>{lob}</SelectItem>
                   ))}
                 </SelectContent>
@@ -2257,7 +2314,7 @@ function ClientsList({ clients, navigateTo }: { clients: CorporateClient[], navi
   );
 }function FleetList({ vehicles, navigateTo }: { vehicles: Vehicle[], navigateTo: any }) {
   const [lobFilter, setLobFilter] = useState<BusinessLine | "All">("All");
-  const [categoryFilter, setCategoryFilter] = useState<Vehicle["category"] | "All">("All");
+  const [categoryFilter, setCategoryFilter] = useState<Vehicle["category"] | "All">("MPV");
   const [searchTerm, setSearchTerm] = useState("");
   const [sortKey, setSortKey] = useState<string>("plateNumber");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
@@ -2299,6 +2356,21 @@ function ClientsList({ clients, navigateTo }: { clients: CorporateClient[], navi
     });
   }, [vehicles, lobFilter, categoryFilter, searchTerm, sortKey, sortOrder]);
 
+  const availableCategories = useMemo(() => {
+    switch (lobFilter) {
+      case "Goldenbird": return ["MPV", "MPV Large", "MPV Premium", "e-Goldenbird"];
+      case "Big Bird": return ["Charter Bus Alpha", "Charter Bus Bravo", "Charter Bus Charlie"];
+      case "Cititrans": return ["Regular Shuttle", "Executive Shuttle", "Jabodetabek Airport Connexion (JAC)", "Busline"];
+      default: return ["MPV", "MPV Large", "MPV Premium", "e-Goldenbird", "Charter Bus Alpha", "Charter Bus Bravo", "Charter Bus Charlie", "Regular Shuttle", "Executive Shuttle", "Jabodetabek Airport Connexion (JAC)", "Busline"];
+    }
+  }, [lobFilter]);
+
+  useEffect(() => {
+    if (!availableCategories.includes(categoryFilter as any)) {
+      setCategoryFilter(availableCategories[0] as any);
+    }
+  }, [availableCategories, categoryFilter]);
+
   return (
     <Card className="border border-slate-200 rounded-xl shadow-sm overflow-hidden bg-white">
       <CardHeader className="p-4 border-b space-y-4">
@@ -2323,7 +2395,7 @@ function ClientsList({ clients, navigateTo }: { clients: CorporateClient[], navi
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest min-w-[70px]">Business Line:</span>
             <div className="flex gap-1 overflow-x-auto pb-1 scrollbar-hide">
-              {["All", "Bluebird", "Goldenbird", "Big Bird", "Cititrans"].map((l) => (
+              {["All", "E-Voucher", "Goldenbird", "Big Bird", "Cititrans"].map((l) => (
                 <Button 
                   key={l}
                   variant={lobFilter === l ? "default" : "outline"} 
@@ -2339,7 +2411,7 @@ function ClientsList({ clients, navigateTo }: { clients: CorporateClient[], navi
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest min-w-[70px]">Asset Class:</span>
             <div className="flex gap-1 overflow-x-auto pb-1 scrollbar-hide">
-              {["All", "Sedan", "SUV", "Bus", "Luxury Sedan", "Van"].map((c) => (
+              {availableCategories.map((c) => (
                 <Button 
                   key={c}
                   variant={categoryFilter === c ? "default" : "outline"} 
@@ -2433,7 +2505,7 @@ function ClientsList({ clients, navigateTo }: { clients: CorporateClient[], navi
                       <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">No assets found</p>
                       <p className="text-[9px] font-medium text-slate-400">Try adjusting your filters or search terms</p>
                     </div>
-                    <Button variant="outline" size="sm" className="h-7 px-3 mt-2 text-[9px] font-bold uppercase tracking-widest rounded-full" onClick={() => { setLobFilter("All"); setCategoryFilter("All"); setSearchTerm(""); }}>
+                    <Button variant="outline" size="sm" className="h-7 px-3 mt-2 text-[9px] font-bold uppercase tracking-widest rounded-full" onClick={() => { setLobFilter("All"); setSearchTerm(""); }}>
                       Reset Filters
                     </Button>
                   </div>
@@ -2755,8 +2827,8 @@ function OrdersList({ orders, navigateTo, vehicles, clients, drivers, appUser }:
                         <button onClick={() => navigateTo("Sales", order.id)} className="font-mono text-xs font-bold text-primary hover:underline w-fit">
                           {order.id}
                         </button>
-                        <Badge variant="outline" className="text-[8px] font-black uppercase tracking-tighter px-1 py-0 border-primary/20 text-primary w-fit">{order.businessLine || "Bluebird"}</Badge>
-                      </div>
+                        <Badge variant="outline" className="text-[8px] font-black uppercase tracking-tighter px-1 py-0 border-primary/20 text-primary w-fit">{order.businessLine || "E-Voucher"}</Badge>
+                        </div>
                     </TableCell>
                     <TableCell className="px-4 py-3 text-xs font-semibold text-primary hover:underline cursor-pointer" onClick={() => navigateTo("Clients", order.clientId)}>
                       {clients.find(c => c.id === order.clientId)?.name || order.clientId}
